@@ -1,0 +1,4 @@
+d:\Sources\c#\repos\CSharpLords\Common\02. vars\01_product\bin\Debug\01_product.exe
+d:\Sources\c#\repos\CSharpLords\Common\02. vars\01_product\bin\Debug\01_product.pdb
+d:\Sources\c#\repos\CSharpLords\Common\02. vars\01_product\obj\x86\Debug\01_product.exe
+d:\Sources\c#\repos\CSharpLords\Common\02. vars\01_product\obj\x86\Debug\01_product.pdb
