@@ -1,9 +1,7 @@
 ﻿using System;
 
-public class Tutorial
-{
-    public static void Main()
-    {
+public class Tutorial {
+    public static void Main() {
         // пишите свой код здесь
 
         // тестовый код
