@@ -45,13 +45,14 @@ namespace Quest
                 GameOver("Конец игры! Проигрыш - игрок заразился тем же вирусом, что и принцесса, застрял на том же сайте со сломанным компьютером");
                 
             }
+          
             else if (answer2 == 3)
             {
                 Hat("Игрок встречает противника - Капча-Монстра, который не дает обновить антивирус. Чтобы его победить, нужно решить задачку: сколько будет 2 + 2 * 2?");
             }
             else
             {
-                ShowInvalidAlert(); 
+                ShowInvalidAlert();
             }
 
             Console.WriteLine();
@@ -164,6 +165,28 @@ namespace Quest
             Console.WriteLine(lose);
             Console.ReadLine();
             Environment.Exit(0);
+        }
+        static void Frame1()
+        {
+            Hat("Ты - супергерой. Твоя задача - вызволить принцессу из плена Всемирной Сети, куда она попала, по неосторожности ткнув в рекламный баннер. Выбери действие:");
+
+            Console.WriteLine();
+            ShowOption("1. Поиграть в Доту");
+            ShowOption("2. Узнать на каком сайте она застряла");
+            int answer1 = int.Parse(Console.ReadLine());
+            Console.WriteLine();
+            if (answer1 == 1)
+            {
+                GameOver("Конец игры! Ты просидел в Доте до утра, и принцессу спас другой хакер");
+            }
+            else if (answer1 == 2)
+            {
+                Hat("Оказывается, принцессе пришло письмо с рекламой суперстойкой помады, и там был баннер со ссылкой на сайт dontclickme.noob.");
+            }
+            else
+            {
+                ShowInvalidAlert();
+            }
         }
     }
 }
