@@ -10,7 +10,7 @@ namespace Quest
     {
         static void Main(string[] args)
         {
-            ShowBriefing();
+            Beginning();
         }
         static void ShowInvalidAlert()
         {
@@ -33,10 +33,9 @@ namespace Quest
         static void GameOver(string lose)
         {
             Console.WriteLine(lose);
-            Console.ReadLine();
-            Environment.Exit(0);
+            NewGame();
         }
-        static void ShowBriefing()
+        static void Beginning()
         {
             Hat("Ты - супергерой. Твоя задача - вызволить принцессу из плена Всемирной Сети, куда она попала, по неосторожности ткнув в рекламный баннер. Выбери действие:");
             Console.WriteLine();
@@ -185,6 +184,21 @@ namespace Quest
                 ShowInvalidAlert();
             }
             Console.ReadLine(); 
+        }
+        static void NewGame()
+        {
+            Console.WriteLine("Хотите начать игру заново?");
+            string YourWish = Console.ReadLine().ToLower();
+            if (YourWish == "да")
+            {
+                Console.Clear();
+                Beginning();
+            }
+            else if (YourWish == "нет")
+            {
+                Console.ReadLine();
+                Environment.Exit(0);
+            }
         }
     }
 }
