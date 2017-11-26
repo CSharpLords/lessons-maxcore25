@@ -8,7 +8,8 @@ namespace CheckPassword {
 	class Program {
 		static void Main(string[] args) {
 			string password = "Супер пароль!";
-            while (true) {
+            int incorrestAttempt = 0;
+            while (incorrestAttempt < 5) {
                 Console.WriteLine("Чтобы пользоваться моей программой, введи пароль!");
                 string answer = Console.ReadLine();
 
@@ -21,8 +22,9 @@ namespace CheckPassword {
                 }
                 else {
                     Console.WriteLine("Неправильно! Хаха, ты не пройдешь!");
-                    Console.ReadLine();
-                    Environment.Exit(0);
+                    
+                    
+                    incorrestAttempt = incorrestAttempt + 1;
                 }
             }
 		}
