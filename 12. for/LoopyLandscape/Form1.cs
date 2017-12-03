@@ -15,7 +15,8 @@ namespace LoopyLandscape {
 			InitializeComponent();
 		}
 
-		protected override void OnPaint(PaintEventArgs e) {
+		protected override void OnPaint(PaintEventArgs e) 
+        {
 			graphics = e.Graphics;
 			graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
@@ -23,8 +24,11 @@ namespace LoopyLandscape {
 			graphics.FillEllipse(Brushes.Yellow, 310, 20, 70, 70);
 
 			// рисуем дерево и траву
-			DrawGrass(0, 270);
-			DrawTree(0, 200);
+            for (int size = 0; size < 400; size = size +100)
+            {
+                DrawGrass(size, 270);
+                DrawTree(size, 200);
+            }
 		}
 
 		private void DrawGrass(int x, int y) {
