@@ -9,14 +9,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CarLine {
-	public partial class Form1 : Form {
+namespace CarLine 
+{
+	public partial class Form1 : Form 
+    {
 		private Graphics graphics;
 		private Image img;
 
 		private int carX = 200;
 		private int speed = 2;
-		public Form1() {
+        
+		public Form1() 
+        {
 			InitializeComponent();
 
 			SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
@@ -24,21 +28,30 @@ namespace CarLine {
 			KeyDown += Form1_KeyPress;
 		}
 
-		protected override void OnPaint(PaintEventArgs e) {
+		protected override void OnPaint(PaintEventArgs e) 
+        {
 			graphics = e.Graphics;
 			graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
 			graphics.Clear(Color.FromArgb(0x44444400));
-			DrawCar(carX, 200);
+            
+            for (int a = 1; a < 200; a = a + 40)
+            {
+			    DrawCar(carX, 200 + a);
+            }
 		}
 
-		private void DrawCar(int x, int y) {
-			graphics.DrawImage(img, x, y);
+		private void DrawCar(int x, int y) 
+        {
+                graphics.DrawImage(img, x, y);
+			
 		}
-
-		private void Form1_KeyPress(object sender, KeyEventArgs e) {
+        
+		private void Form1_KeyPress(object sender, KeyEventArgs e) 
+        {
 			Console.WriteLine(Keys.Left);
-			switch (e.KeyCode) {
+			switch (e.KeyCode) 
+            {
 				case Keys.A:
 				case Keys.Left:
 					carX -= speed;
@@ -47,6 +60,7 @@ namespace CarLine {
 				case Keys.Right:
 					carX += speed;
 					break;
+                
 			}
 			Invalidate();
 		}
