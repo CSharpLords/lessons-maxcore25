@@ -18,8 +18,8 @@ namespace LinedPaper {
 			Graphics graphics = e.Graphics;
 			graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
-			for (int i = 0; i <= 150; i += 20) {
-				graphics.DrawLine(Pens.LightSkyBlue, 0, i, 300, i); // первая пара чисел - координаты начала отрезка, вторая - координаты конца
+			for (int i = 0; i <= 7; i += 1) {
+				graphics.DrawLine(Pens.LightSkyBlue, 0, i * 20, 300, i * 20); // первая пара чисел - координаты начала отрезка, вторая - координаты конца
 			}
 		}
 	}
