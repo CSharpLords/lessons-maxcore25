@@ -6,7 +6,9 @@ using System;
 public class TestScript : MonoBehaviour 
 {
 	float time = 0;
+
 	// Use this for initialization
+
 	void Start () 
 	{
 		
@@ -21,5 +23,6 @@ public class TestScript : MonoBehaviour
 		time = time + Time.deltaTime;
 		int seconds = (int)time;
 		print ("Количество секунд: " + seconds);
+
 	}
 }
