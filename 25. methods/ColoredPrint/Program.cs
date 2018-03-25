@@ -2,7 +2,8 @@
 
 namespace ColoredPrint {
 	class Program {
-		static void Main(string[] args) {
+		static void Main(string[] args) 
+        {
 			// вызов метода PrintColoredText c разными аргументами
 			PrintColoredText("This text should be red", ConsoleColor.Red);
 			PrintColoredText("This text should be yellow", ConsoleColor.Yellow);
@@ -10,8 +11,11 @@ namespace ColoredPrint {
 			Console.ReadLine();
 		}
 
-		static void PrintColoredText(string text, ConsoleColor color) {
-			// пиши код здесь
+		static void PrintColoredText(string text, ConsoleColor color) 
+        {
+            Console.ForegroundColor = color;
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Console.WriteLine(text);
 		}
 	}
 }
