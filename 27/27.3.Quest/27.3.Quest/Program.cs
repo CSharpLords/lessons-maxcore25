@@ -8,7 +8,7 @@ namespace _27._3.Quest
     class Program
     {
         static double maxHP = 100;
-        static double HP = 100;
+        static double HP = 50;
         static double maxDMG = 50;
         static double DMG = 50;
         static double robbersHP = 200;
@@ -21,8 +21,11 @@ namespace _27._3.Quest
         }
         static void Greenfields()
         {
+            Reset();
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Приветствую тебя, додик, в моей 'Недоигре'!");
             Console.WriteLine("Выбери одно действие:");
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("1.Перейти в лес");
             Console.WriteLine("2.Oсмотреть поле");
             int answer1 = int.Parse(Console.ReadLine());
@@ -37,8 +40,10 @@ namespace _27._3.Quest
         }
         static void Forest()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Теперь ты в лесу торчков! Тут много закладок и рынков с нелегальными товарами! Но также здесь есть разбойники-торчки, которым нужна очередная доза мета, чтобы выжить и получить кайф!");
             Console.WriteLine("Перед тобой висит указатель с психоделическими рисунками Фрейда. Выбери, куда пойти:");
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("1.Перейти на Зеленые поля");
             Console.WriteLine("2.Атаковать разбойников-торчков");
             int answer2 = int.Parse(Console.ReadLine());
@@ -58,7 +63,7 @@ namespace _27._3.Quest
             if (item == 0)
             {
                 maxHP = 250;
-
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Поздравляю! Ты нашёл тряпку, которая сгодится для брони!");
                 Console.WriteLine("Теперь уровень жизни: 250");
                 Forest();
@@ -66,7 +71,7 @@ namespace _27._3.Quest
             if(item == 1)
             {
                 maxDMG = 100;
-
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Поздравляю! Ты нашёл ядовитый шприц от герыча!");
                 Console.WriteLine("Теперь уровень атаки: 100");
                 Forest();
@@ -75,30 +80,32 @@ namespace _27._3.Quest
         }
         static void FightRobbers()
         {
+            RobbersAttack();
             
-                Console.WriteLine("Разбойники атакуют!");
-                maxHP = maxHP - robbersDMG; // =250 - 100 
-                Console.WriteLine("Твоё хп: " + HP); // 150
-                robbersDMG = GetReducedAttack(HP, maxHP, robbersDMG);
-                
-                if(DMG == 50 || maxDMG == 50)
+            if(robbersHP > 0)
+            {
+                if(maxHP > 0)
                 {
-                    Console.WriteLine("Ты бьёшь рукой!"); 
-                    robbersHP = robbersHP - DMG; // 200 - 50
-                    Console.WriteLine("Хп этих торчков: " + robbersHP); // = 150
-                }
-                
-                else if(DMG  >= 20)
-                {
-                    Console.WriteLine("Ты втыкаешь шприц в шею одному разбойнику, делаешь сальтуху и втыкаешь в вену другому! Они умерают от передозировки!");
-                
+                    AskQuestion();
+                    HeroAttack();
                 }
                 
                 else if(maxHP <= 0)
                 {
+                    
+                    
                     Console.WriteLine("Тебе кинули в лицо серную кислоту! Ты сдох!");
+                    End();
                 }
-            
+            }
+                    
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("Ты втыкаешь шприц в шею одному разбойнику, делаешь сальтуху и втыкаешь в вену другому! Они умерают от передозировки!");
+                End();
+            }
+                    
             
         }
         static double GetReducedAttack(double health, double maxHealth, double maxAttack)
@@ -107,6 +114,67 @@ namespace _27._3.Quest
             double attackProportion = maxAttack / healthProportion;
             return attackProportion;
         }
-        
+        static void AskQuestion()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Выбери дейтсвие:");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("1.Атаковать");
+            Console.WriteLine("2.Убежать в Зелёные поля");
+            int answerQuestion = int.Parse(Console.ReadLine());
+            
+            if(answerQuestion == 1)
+            {
+                HeroAttack();
+                FightRobbers();
+            }
+            else if(answerQuestion == 2)
+            {
+                Greenfields();
+            }
+        }
+        static void HeroAttack()
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Ты атакуешь!"); 
+            robbersHP = robbersHP - DMG; 
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Хп этих торчков: " + robbersHP);
+        }
+        static void RobbersAttack()
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Разбойники атакуют!");
+            maxHP = maxHP - robbersDMG;  
+            robbersDMG = GetReducedAttack(HP, maxHP, robbersDMG);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Твоё хп: " + maxHP); 
+        }
+        static void End()
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Выбери желание:");
+            Console.WriteLine("1.Выйти из игры, т.к. я уже задолбался");
+            Console.WriteLine("2.Начать сначала, т.к. это самая лучшая игра");
+            int lastAnswer = int.Parse(Console.ReadLine());
+            if(lastAnswer == 1)
+            {
+                Environment.Exit(0);
+            }
+            else if(lastAnswer == 2)
+            {
+                
+                Greenfields();
+            }
+        }
+        static void Reset()
+        {
+            double maxHP = 100;
+            double HP = 50;
+            double maxDMG = 50;
+            double DMG = 50;
+            double robbersHP = 200;
+            double robbersDMG = 100;
+        }
     }
 }
