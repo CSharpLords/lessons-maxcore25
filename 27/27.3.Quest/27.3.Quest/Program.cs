@@ -21,7 +21,6 @@ namespace _27._3.Quest
         }
         static void Greenfields()
         {
-            Reset();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Приветствую тебя, додик, в моей 'Недоигре'!");
             Console.WriteLine("Выбери одно действие:");
@@ -163,18 +162,18 @@ namespace _27._3.Quest
             }
             else if(lastAnswer == 2)
             {
-                
+                Reset();
                 Greenfields();
             }
         }
         static void Reset()
         {
-            double maxHP = 100;
-            double HP = 50;
-            double maxDMG = 50;
-            double DMG = 50;
-            double robbersHP = 200;
-            double robbersDMG = 100;
+            maxHP = 100;
+            HP = 50;
+            maxDMG = 50;
+            DMG = 50;
+            robbersHP = 200;
+            robbersDMG = 100;
         }
     }
 }
