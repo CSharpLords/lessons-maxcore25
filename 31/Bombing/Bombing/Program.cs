@@ -26,7 +26,9 @@ namespace Bombing
                
                 if (keyInfo.Key == ConsoleKey.Spacebar)
                 {
-                    
+                    Console.Clear();
+                    Update(); // выполняем основные действия
+                    Thread.Sleep(100);
                 }
             }
 
