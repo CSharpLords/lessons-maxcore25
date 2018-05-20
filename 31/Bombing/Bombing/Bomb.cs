@@ -15,12 +15,16 @@ namespace Bombing
         {
             xBomb = x;
         }
-
+        public Bomb()
+        {
+            
+        }
         public void Fall()
         {
             y += 2;
             Console.SetCursorPosition(xBomb, y);
             Console.WriteLine(bomb);
+            Console.WriteLine(xBomb);
         }
         public void Explosion()
         {

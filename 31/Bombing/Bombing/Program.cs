@@ -10,6 +10,8 @@ namespace Bombing
     {
         static Plane plane = new Plane();
         static List<Bomb> bombs = new List<Bomb>();
+        static List<Building> buildings = new List<Building>();
+        static Bomb bomb = new Bomb();
         static Building building = new Building();
         static void Main(string[] args)
         {
@@ -18,12 +20,12 @@ namespace Bombing
                 while (!Console.KeyAvailable)
                 {
                     Console.Clear();
-                    Update(); 
+                    Update();
                     Thread.Sleep(100);
                 }
 
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
-               
+
                 if (keyInfo.Key == ConsoleKey.Spacebar)
                 {
                     bombs.Add(new Bomb(plane.x));
@@ -32,8 +34,8 @@ namespace Bombing
         }
         static void Update()
         {
-            building.DrawBuilding();
-            building.DrawCottage();
+            DrawBuildings();
+            
             plane.Flight();
             for (int i = 0; i < bombs.Count; i++)
             {
@@ -42,15 +44,26 @@ namespace Bombing
                 {
                     bombs[i].Explosion();
                     bombs.RemoveAt(i);
-                    i--;
+                    Destruction();
+                    i--;  
                 }
-                
             }
 
         }
-        static void Dustraction()
+        static void Destruction()
         {
+            int dist = building.xBuilding - bomb.xBomb;
             
+            if (dist < 5 || dist > 5)
+            {
+                Console.WriteLine("boom");
+                buildings.RemoveAt(0);
+            }
+        }
+        static void DrawBuildings()
+        {
+            buildings.Add(new Building(2));
+            //buildings.Add(new Building(30));
         }
     }
 }

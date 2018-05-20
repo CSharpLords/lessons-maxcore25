@@ -7,21 +7,31 @@ namespace Bombing
 {
     class Building
     {
-        public void DrawBuilding()
+        public int xBuilding;
+        public Building(int x)
         {
-            Console.SetCursorPosition(5, Console.WindowHeight);
-            Console.WriteLine("//\\");
-            Console.SetCursorPosition(5, Console.WindowHeight);
-            Console.WriteLine("|  |");
-            Console.SetCursorPosition(5, Console.WindowHeight);
-            Console.WriteLine("|  |");
+            DrawBuilding(x);
+            //DrawCottage(x + 20);
         }
-        public void DrawCottage()
+        public Building()
         {
-            Console.SetCursorPosition(8, Console.WindowHeight);
+        }
+        public void DrawBuilding(int x)
+        {
+            Console.SetCursorPosition(x, Console.WindowHeight - 4);
             Console.WriteLine("//\\");
-            Console.SetCursorPosition(8, Console.WindowHeight);
-            Console.WriteLine("|  |");
+            Console.SetCursorPosition(x, Console.WindowHeight - 3);
+            Console.WriteLine("|| |");
+            Console.SetCursorPosition(x, Console.WindowHeight - 2);
+            Console.WriteLine("||_|");
+            
+        }
+        public void DrawCottage(int x)
+        {
+            Console.SetCursorPosition(x, Console.WindowHeight - 3);
+            Console.WriteLine("//\\");
+            Console.SetCursorPosition(x, Console.WindowHeight - 2);
+            Console.WriteLine("||_|");
         }
     }
 }
