@@ -8,16 +8,17 @@ namespace Bombing
     class Plane
     {
         public string plane = ">";
-        private int speed = 2;
-        public int x = 0;
-        public int y = 0;
+        public static int x = 0;
         public void Flight()
         {
-            for (int i = 0; i < 10; i += speed)
+            int endBorder = Console.WindowWidth;
+            x += 3;
+            if (endBorder < x)
             {
-                Console.SetCursorPosition(i, y);
-                Console.Write(plane);
+                x = 0;
             }
+            Console.SetCursorPosition(x, 0);
+            Console.WriteLine(plane);
         }
     }
 }

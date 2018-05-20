@@ -9,16 +9,15 @@ namespace Bombing
     class Program
     {
         static Plane plane = new Plane();
+        static Bomb bomb = new Bomb();
         static void Main(string[] args)
         {
             while (true)
             {
-                // Console.KeyAvailable становится равен тру, когда мы нажали любую клавишу.
-                // так что повторяем, пока кнопка не нажата
                 while (!Console.KeyAvailable)
                 {
                     Console.Clear();
-                    Update(); // выполняем основные действия
+                    Update(); 
                     Thread.Sleep(100);
                 }
 
@@ -27,19 +26,16 @@ namespace Bombing
                 if (keyInfo.Key == ConsoleKey.Spacebar)
                 {
                     Console.Clear();
-                    Update(); // выполняем основные действия
+                    Update(); 
                     Thread.Sleep(100);
                 }
             }
-
-           
-            
             Console.ReadLine();
         }
         static void Update()
         {
-            
             plane.Flight();
+            bomb.DropBomb();
         }
     }
 }
