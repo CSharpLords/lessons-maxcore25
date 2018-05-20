@@ -9,7 +9,8 @@ namespace Bombing
     class Program
     {
         static Plane plane = new Plane();
-        static Bomb bomb = new Bomb();
+        static List<Bomb> bombs = new List<Bomb>();
+        static Building building = new Building();
         static void Main(string[] args)
         {
             while (true)
@@ -25,17 +26,31 @@ namespace Bombing
                
                 if (keyInfo.Key == ConsoleKey.Spacebar)
                 {
-                    Console.Clear();
-                    Update(); 
-                    Thread.Sleep(100);
+                    bombs.Add(new Bomb(plane.x));
                 }
             }
-            Console.ReadLine();
         }
         static void Update()
         {
+            building.DrawBuilding();
+            building.DrawCottage();
             plane.Flight();
-            bomb.DropBomb();
+            for (int i = 0; i < bombs.Count; i++)
+            {
+                bombs[i].Fall();
+                if (Console.WindowHeight <= bombs[i].y)
+                {
+                    bombs[i].Explosion();
+                    bombs.RemoveAt(i);
+                    i--;
+                }
+                
+            }
+
+        }
+        static void Dustraction()
+        {
+            
         }
     }
 }

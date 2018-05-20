@@ -8,12 +8,12 @@ namespace Bombing
     class Plane
     {
         public string plane = ">";
-        public static int x = 0;
+        public int x = 0;
         public void Flight()
         {
             int endBorder = Console.WindowWidth;
             x += 3;
-            if (endBorder < x)
+            if (endBorder <= x)
             {
                 x = 0;
             }

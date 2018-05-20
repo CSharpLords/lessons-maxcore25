@@ -9,46 +9,31 @@ namespace Bombing
     class Bomb
     {
         public string bomb = "0";
-        static int y = 0;
-        
-        public void DropBomb()
+        public int y = 0;
+        public int xBomb;
+        public Bomb(int x)
         {
-            int xBomb = Plane.x;
-            int groundBorder = Console.WindowHeight;
-            y += 1;
+            xBomb = x;
+        }
 
-            List<string> bombs = new List<string>();
-            bombs.Add(bomb);
-            
-            ConsoleKeyInfo keyInfo = Console.ReadKey();
-
-            if (keyInfo.Key == ConsoleKey.Spacebar)
-            {
-                Console.SetCursorPosition(xBomb, y);
-                Console.WriteLine(bomb);
-            }
-            
-            if (groundBorder < y)
-            {
-                bombs.Remove(bomb);
-                Explosion();
-                Thread.Sleep(100);
-                Console.Clear();
-                y = 0;
-            }
-            
+        public void Fall()
+        {
+            y += 2;
+            Console.SetCursorPosition(xBomb, y);
+            Console.WriteLine(bomb);
         }
         public void Explosion()
         {
-            int groundBorder = Console.WindowHeight;
-            Console.SetCursorPosition(groundBorder, y);
+            Console.SetCursorPosition(xBomb, Console.WindowHeight + 2);
 
-            Console.WriteLine("˄ ▓▒▓ /");
+            Console.WriteLine("██▓▓▓▒█");
+            Console.SetCursorPosition(xBomb, Console.WindowHeight + 1);
 
             Console.WriteLine("[ ▓▓▓▒");
-  
-            Console.WriteLine("██▓▓▓▒█ █▒▓");
+            Console.SetCursorPosition(xBomb, Console.WindowHeight);
+
+            Console.WriteLine("˄ ▓▒▓ /");
         }
-        
+
     }
 }
