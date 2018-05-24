@@ -11,14 +11,19 @@ namespace Bombing
         static Plane plane = new Plane();
         static List<Bomb> bombs = new List<Bomb>();
         static List<Building> buildings = new List<Building>();
-        static Bomb bomb = new Bomb();
-        static Building building = new Building();
+        //static Bomb bomb = new Bomb();
+        //static Building building = new Building();
         static void Main(string[] args)
         {
+            buildings.Add(new Building(10));
+            buildings.Add(new Building(20));
+            
             while (true)
             {
+                
                 while (!Console.KeyAvailable)
                 {
+                    
                     Console.Clear();
                     Update();
                     Thread.Sleep(100);
@@ -35,12 +40,16 @@ namespace Bombing
         static void Update()
         {
             DrawBuildings();
-            
             plane.Flight();
             for (int i = 0; i < bombs.Count; i++)
             {
-                bombs[i].Fall();
-                if (Console.WindowHeight <= bombs[i].y)
+                int dist = Console.WindowHeight - bombs[i].y;
+                if (dist > 1)
+                {
+                    bombs[i].Fall();
+                }
+                
+                if (dist <= 2)
                 {
                     bombs[i].Explosion();
                     bombs.RemoveAt(i);
@@ -48,22 +57,23 @@ namespace Bombing
                     i--;  
                 }
             }
-
         }
         static void Destruction()
         {
-            int dist = building.xBuilding - bomb.xBomb;
+            int dist = xBuilding - xBomb;
             
-            if (dist < 5 || dist > 5)
+            if (dist <= 1 || dist <= 1)
             {
-                Console.WriteLine("boom");
                 buildings.RemoveAt(0);
             }
         }
         static void DrawBuildings()
         {
-            buildings.Add(new Building(2));
-            //buildings.Add(new Building(30));
+            for (int i = 0; i < buildings.Count; i++)
+            {
+                buildings[i].DrawBuilding();
+                buildings[i].DrawCottage();
+            }//&& dist >= 0
         }
     }
 }

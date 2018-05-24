@@ -10,27 +10,29 @@ namespace Bombing
         public int xBuilding;
         public Building(int x)
         {
-            DrawBuilding(x);
-            //DrawCottage(x + 20);
+            xBuilding = x;
+            
+            //DrawCottage(xBuilding + 20);
         }
         public Building()
         {
+
         }
-        public void DrawBuilding(int x)
+        public void DrawBuilding()
         {
-            Console.SetCursorPosition(x, Console.WindowHeight - 4);
+            Console.SetCursorPosition(xBuilding, Console.WindowHeight - 3);
             Console.WriteLine("//\\");
-            Console.SetCursorPosition(x, Console.WindowHeight - 3);
+            Console.SetCursorPosition(xBuilding, Console.WindowHeight - 2);
             Console.WriteLine("|| |");
-            Console.SetCursorPosition(x, Console.WindowHeight - 2);
+            Console.SetCursorPosition(xBuilding, Console.WindowHeight - 1);
             Console.WriteLine("||_|");
             
         }
-        public void DrawCottage(int x)
+        public void DrawCottage()
         {
-            Console.SetCursorPosition(x, Console.WindowHeight - 3);
+            Console.SetCursorPosition(xBuilding + 20, Console.WindowHeight - 2);
             Console.WriteLine("//\\");
-            Console.SetCursorPosition(x, Console.WindowHeight - 2);
+            Console.SetCursorPosition(xBuilding + 20, Console.WindowHeight - 1);
             Console.WriteLine("||_|");
         }
     }

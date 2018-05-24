@@ -23,20 +23,19 @@ namespace Bombing
         {
             y += 2;
             Console.SetCursorPosition(xBomb, y);
-            Console.WriteLine(bomb);
-            Console.WriteLine(xBomb);
+            Console.Write(bomb);
         }
         public void Explosion()
         {
-            Console.SetCursorPosition(xBomb, Console.WindowHeight + 2);
+            Console.SetCursorPosition(xBomb, Console.WindowHeight - 3);
 
-            Console.WriteLine("██▓▓▓▒█");
-            Console.SetCursorPosition(xBomb, Console.WindowHeight + 1);
+            Console.WriteLine("˄ ▓▒▓ / ");
+            Console.SetCursorPosition(xBomb, Console.WindowHeight - 2);
 
             Console.WriteLine("[ ▓▓▓▒");
-            Console.SetCursorPosition(xBomb, Console.WindowHeight);
+            Console.SetCursorPosition(xBomb, Console.WindowHeight - 1);
 
-            Console.WriteLine("˄ ▓▒▓ /");
+            Console.Write("██▓▓▓▒█");
         }
 
     }
