@@ -66,26 +66,21 @@ namespace Bombing
         {
             for (int i = 0; i < buildings.Count; i++)
             {
-                int dist = buildings[i].xBuilding - xBomb;
-            
-                if (dist <= 4 && dist >= 0)
+                int distBuilding = buildings[i].xBuilding - xBomb;
+                int distCottage = cottages[i].xBuilding - xBomb;
+                if (distBuilding <= 4 && distBuilding >= 0)
                 {
                     buildings.Remove(buildings[i]);
                 }
-                if (dist >= -4 && dist <= 0)
+                else if (distBuilding >= -4 && distBuilding <= 0)
                 {
                     buildings.Remove(buildings[i]);
                 }
-            }
-            for (int i = 0; i < cottages.Count; i++)
-            {
-                int dist = cottages[i].xBuilding - xBomb;
-            
-                if (dist <= 4 && dist >= 0)
+                if (distCottage <= 4 && distCottage >= 0)
                 {
                     buildings.Remove(cottages[i]);
                 }
-                if (dist >= -4 && dist <= 0)
+                else if (distCottage >= -4 && distCottage <= 0)
                 {
                     buildings.Remove(cottages[i]);
                 }
