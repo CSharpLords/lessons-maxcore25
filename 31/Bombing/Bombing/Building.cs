@@ -30,9 +30,9 @@ namespace Bombing
         }
         public void DrawCottage()
         {
-            Console.SetCursorPosition(xBuilding + 20, Console.WindowHeight - 2);
+            Console.SetCursorPosition(xBuilding, Console.WindowHeight - 2);
             Console.WriteLine("//\\");
-            Console.SetCursorPosition(xBuilding + 20, Console.WindowHeight - 1);
+            Console.SetCursorPosition(xBuilding, Console.WindowHeight - 1);
             Console.WriteLine("||_|");
         }
     }

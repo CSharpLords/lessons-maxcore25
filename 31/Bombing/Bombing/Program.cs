@@ -11,12 +11,16 @@ namespace Bombing
         static Plane plane = new Plane();
         static List<Bomb> bombs = new List<Bomb>();
         static List<Building> buildings = new List<Building>();
+        static List<Building> cottages = new List<Building>();
         //static Bomb bomb = new Bomb();
         //static Building building = new Building();
         static void Main(string[] args)
         {
             buildings.Add(new Building(10));
-            buildings.Add(new Building(20));
+            buildings.Add(new Building(30));
+            cottages.Add(new Building(45));
+            cottages.Add(new Building(50));
+            cottages.Add(new Building(55));
             
             while (true)
             {
@@ -52,28 +56,54 @@ namespace Bombing
                 if (dist <= 2)
                 {
                     bombs[i].Explosion();
+                    Destruction(bombs[i].xBomb);
                     bombs.RemoveAt(i);
-                    Destruction();
                     i--;  
                 }
             }
         }
-        static void Destruction()
+        static void Destruction(int xBomb)
         {
-            int dist = xBuilding - xBomb;
-            
-            if (dist <= 1 || dist <= 1)
+            for (int i = 0; i < buildings.Count; i++)
             {
-                buildings.RemoveAt(0);
+                int dist = buildings[i].xBuilding - xBomb;
+            
+                if (dist <= 4 && dist >= 0)
+                {
+                    buildings.Remove(buildings[i]);
+                }
+                if (dist >= -4 && dist <= 0)
+                {
+                    buildings.Remove(buildings[i]);
+                }
             }
+            for (int i = 0; i < cottages.Count; i++)
+            {
+                int dist = cottages[i].xBuilding - xBomb;
+            
+                if (dist <= 4 && dist >= 0)
+                {
+                    buildings.Remove(cottages[i]);
+                }
+                if (dist >= -4 && dist <= 0)
+                {
+                    buildings.Remove(cottages[i]);
+                }
+            }
+            
         }
         static void DrawBuildings()
         {
             for (int i = 0; i < buildings.Count; i++)
             {
                 buildings[i].DrawBuilding();
-                buildings[i].DrawCottage();
-            }//&& dist >= 0
+                
+            }
+            for (int i = 0; i < cottages.Count; i++)
+            {
+                
+                cottages[i].DrawCottage();
+            }
         }
     }
 }
