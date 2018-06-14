@@ -7,9 +7,9 @@ using System.Threading;
 
 namespace Tanks
 {
-    //https://github.com/CSharpWizards/homework_w-pchuck77/tree/master/13
     class Program
     {
+        static PlayerTank playerTank = new PlayerTank();
         static void Main(string[] args)
         {
             
@@ -27,11 +27,27 @@ namespace Tanks
                 {
                     
                 }
+                if (keyInfo.Key == ConsoleKey.UpArrow || keyInfo.Key == ConsoleKey.W)
+                {
+                    playerTank.GoUp();
+                }
+                if (keyInfo.Key == ConsoleKey.DownArrow || keyInfo.Key == ConsoleKey.S)
+                {
+                    playerTank.GoDown();
+                }
+                if (keyInfo.Key == ConsoleKey.LeftArrow || keyInfo.Key == ConsoleKey.A)
+                {
+                    playerTank.GoLeft();
+                }
+                if (keyInfo.Key == ConsoleKey.RightArrow || keyInfo.Key == ConsoleKey.D)
+                {
+                    playerTank.GoRight();
+                }
             }
         }
         static void Update()
         {
-
+            playerTank.Draw();
         }
     }
 }
