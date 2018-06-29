@@ -7,7 +7,7 @@ namespace Tanks
 {
     class PlayerTank
     {
-        public char tank = '0';
+        public char tank = '█';
         public char tankbarrel = '|';
         public int x = Console.WindowWidth / 2;
         public int y = Console.WindowHeight / 2 ;

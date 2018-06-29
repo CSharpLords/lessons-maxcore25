@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Collections.Generic;
 
 
 namespace Tanks
@@ -10,6 +11,7 @@ namespace Tanks
     class Program
     {
         static PlayerTank playerTank = new PlayerTank();
+        static List<Bullet> bullets = new List<Bullet>();
         static void Main(string[] args)
         {
             
@@ -25,7 +27,7 @@ namespace Tanks
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
                 if (keyInfo.Key == ConsoleKey.Spacebar)
                 {
-                    
+                    bullets.Add(new Bullet(playerTank.x, playerTank.y, playerTank.direction));
                 }
                 if (keyInfo.Key == ConsoleKey.UpArrow || keyInfo.Key == ConsoleKey.W)
                 {
@@ -48,6 +50,56 @@ namespace Tanks
         static void Update()
         {
             playerTank.Draw();
+            for (int i = 0; i < bullets.Count; i++)
+            {
+                int dist1 = Console.WindowHeight - bullets[i].yBullet;
+                if (dist1 > 1)
+                {
+                    bullets[i].Shoot();
+                }
+
+                else if (dist1 <= 1)
+                {
+                    bullets.RemoveAt(i);
+                    i--;
+                }
+
+                int dist2 = Console.WindowTop - bullets[i].yBullet;
+                if (dist2 < 0)
+                {
+                    bullets[i].Shoot();
+                }
+
+                else if (dist2 >= 0)
+                {
+                    bullets.RemoveAt(i);
+                    i--;
+                }
+
+                int dist3 = Console.WindowLeft - bullets[i].xBullet;
+                if (dist3 < 0)
+                {
+                    bullets[i].Shoot();
+                }
+
+                else if (dist3 >= -3)
+                {
+                    bullets.RemoveAt(i);
+                    i--;
+                }
+
+                int dist4 = Console.WindowWidth - bullets[i].xBullet;
+                if (dist4 > 1)
+                {
+                    bullets[i].Shoot();
+                }
+
+                else if (dist4 <= 1)
+                {
+                    bullets.RemoveAt(i);
+                    i--;
+                }
+            }
         }
     }
 }

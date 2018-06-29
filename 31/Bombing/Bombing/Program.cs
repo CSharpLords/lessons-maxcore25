@@ -12,8 +12,6 @@ namespace Bombing
         static List<Bomb> bombs = new List<Bomb>();
         static List<Building> buildings = new List<Building>();
         static List<Building> cottages = new List<Building>();
-        //static Bomb bomb = new Bomb();
-        //static Building building = new Building();
         static void Main(string[] args)
         {
             buildings.Add(new Building(10));
