@@ -8,7 +8,7 @@ namespace Tanks
     class PlayerTank
     {
         public char tank = '█';
-        public char tankbarrel = '|';
+        public char tankBarrel = '|';
         public int x = Console.WindowWidth / 2;
         public int y = Console.WindowHeight / 2 ;
         public int direction = 1;
@@ -32,7 +32,7 @@ namespace Tanks
             {
                 Console.SetCursorPosition(x + 1, y);
             }
-            Console.Write(tankbarrel);
+            Console.Write(tankBarrel);
             Console.SetCursorPosition(x, y);
             Console.Write(tank);
             Console.ForegroundColor = ConsoleColor.Gray;
@@ -41,7 +41,7 @@ namespace Tanks
         {
             direction = 1;
             y--;
-            tankbarrel ='|';
+            tankBarrel ='|';
             if (y <= 0)
             {
                 y = Console.WindowHeight - 1;
@@ -51,7 +51,7 @@ namespace Tanks
         {
             direction = 2;
             y++;
-            tankbarrel = '|';
+            tankBarrel = '|';
             if (y >= Console.WindowHeight - 1)
             {
                 y = 0;
@@ -61,7 +61,7 @@ namespace Tanks
         {
             direction = 3;
             x--;
-            tankbarrel = '-';
+            tankBarrel = '-';
             if (x <= 0)
             {
                 x = Console.WindowWidth - 1;
@@ -71,7 +71,7 @@ namespace Tanks
         {
             direction = 4;
             x++;
-            tankbarrel = '-';
+            tankBarrel = '-';
             if (x >= Console.WindowWidth - 1)
             {
                 x = 0;

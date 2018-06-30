@@ -12,15 +12,16 @@ namespace Tanks
     {
         static PlayerTank playerTank = new PlayerTank();
         static List<Bullet> bullets = new List<Bullet>();
+        static List<Tank> enemyTanks = new List<Tank>();
         static void Main(string[] args)
         {
-            
+
             while (true)
             {
                 while (!Console.KeyAvailable)
                 {
                     Console.Clear();
-                    Update(); 
+                    Update();
                     Thread.Sleep(100);
                 }
 
@@ -49,57 +50,39 @@ namespace Tanks
         }
         static void Update()
         {
+
+            enemyTanks.Add(new Tank());
+            Thread.Sleep(6000);
+
             playerTank.Draw();
             for (int i = 0; i < bullets.Count; i++)
             {
-                int dist1 = Console.WindowHeight - bullets[i].yBullet;
-                if (dist1 > 1)
-                {
-                    bullets[i].Shoot();
-                }
-
-                else if (dist1 <= 1)
+                if (bullets[i].yBullet <= Console.WindowTop - 2)
                 {
                     bullets.RemoveAt(i);
                     i--;
                 }
-
-                int dist2 = Console.WindowTop - bullets[i].yBullet;
-                if (dist2 < 0)
-                {
-                    bullets[i].Shoot();
-                }
-
-                else if (dist2 >= 0)
+                if (bullets[i].yBullet >= Console.WindowHeight + 2)
                 {
                     bullets.RemoveAt(i);
                     i--;
                 }
-
-                int dist3 = Console.WindowLeft - bullets[i].xBullet;
-                if (dist3 < 0)
+                if (bullets[i].yBullet > 0 && bullets[i].yBullet < Console.WindowHeight && bullets[i].xBullet > 0 && bullets[i].xBullet < Console.WindowWidth)
                 {
                     bullets[i].Shoot();
                 }
-
-                else if (dist3 >= -3)
+                if (bullets[i].xBullet <= Console.WindowLeft + 2)
                 {
                     bullets.RemoveAt(i);
                     i--;
                 }
-
-                int dist4 = Console.WindowWidth - bullets[i].xBullet;
-                if (dist4 > 1)
-                {
-                    bullets[i].Shoot();
-                }
-
-                else if (dist4 <= 1)
+                if (bullets[i].xBullet >= Console.WindowWidth - 2)
                 {
                     bullets.RemoveAt(i);
                     i--;
                 }
             }
+
         }
     }
 }
