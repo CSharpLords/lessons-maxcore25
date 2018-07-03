@@ -50,11 +50,14 @@ namespace Tanks
         }
         static void Update()
         {
-
-            enemyTanks.Add(new Tank());
-            Thread.Sleep(6000);
-
             playerTank.Draw();
+            for (int i = 0; i < 2; i++)
+			{
+                enemyTanks.Add(new Tank());
+                Thread.Sleep(6000);
+			    enemyTanks.Add(new Tank());
+                enemyTanks[i].DrawEnemyTank();
+			}
             for (int i = 0; i < bullets.Count; i++)
             {
                 if (bullets[i].yBullet <= Console.WindowTop - 2)
