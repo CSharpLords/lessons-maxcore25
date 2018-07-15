@@ -19,8 +19,6 @@ namespace Tanks
         }
         public void DrawEnemyTank()
         {
-           
-            
             Console.ForegroundColor = ConsoleColor.Red;
             Console.SetCursorPosition(x, y);
             Console.Write(enemyTank);
