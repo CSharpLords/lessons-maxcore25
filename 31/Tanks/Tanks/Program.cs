@@ -13,6 +13,7 @@ namespace Tanks
         static PlayerTank playerTank = new PlayerTank();
         static List<Bullet> bullets = new List<Bullet>();
         static List<Tank> enemyTanks = new List<Tank>();
+        static int frameAmount = 100;
         static void Main(string[] args)
         {
 
@@ -50,42 +51,47 @@ namespace Tanks
         }
         static void Update()
         {
-            for (int i = 0; i < 2; i++)
-			{
-                enemyTanks.Add(new Tank());
-                //Thread.Sleep(6000);
-			    enemyTanks.Add(new Tank());
-                enemyTanks[i].DrawEnemyTank();
-                playerTank.Draw();
-			}
-            for (int i = 0; i < bullets.Count; i++)
+            playerTank.Draw();
+            if (frameAmount == 100)
             {
-                if (bullets[i].yBullet <= Console.WindowTop - 2)
+                frameAmount = 0;
+                for (int i = 0; i < 1; i++)
                 {
-                    bullets.RemoveAt(i);
-                    i--;
-                }
-                if (bullets[i].yBullet >= Console.WindowHeight + 2)
-                {
-                    bullets.RemoveAt(i);
-                    i--;
-                }
-                if (bullets[i].yBullet > 0 && bullets[i].yBullet < Console.WindowHeight && bullets[i].xBullet > 0 && bullets[i].xBullet < Console.WindowWidth)
-                {
-                    bullets[i].Shoot();
-                }
-                if (bullets[i].xBullet <= Console.WindowLeft + 2)
-                {
-                    bullets.RemoveAt(i);
-                    i--;
-                }
-                if (bullets[i].xBullet >= Console.WindowWidth - 2)
-                {
-                    bullets.RemoveAt(i);
-                    i--;
+                    enemyTanks.Add(new Tank());
+                    enemyTanks[i].DrawEnemyTank();
+
+
+
+                    for (int j = 0; j < bullets.Count; j++)
+                    {
+                        if (bullets[j].yBullet <= Console.WindowTop - 2)
+                        {
+                            bullets.RemoveAt(j);
+                            j--;
+                        }
+                        if (bullets[j].yBullet >= Console.WindowHeight + 2)
+                        {
+                            bullets.RemoveAt(j);
+                            j--;
+                        }
+                        if (bullets[j].yBullet > 0 && bullets[j].yBullet < Console.WindowHeight && bullets[j].xBullet > 0 && bullets[j].xBullet < Console.WindowWidth)
+                        {
+                            bullets[j].Shoot();
+                        }
+                        if (bullets[j].xBullet <= Console.WindowLeft + 2)
+                        {
+                            bullets.RemoveAt(j);
+                            j--;
+                        }
+                        if (bullets[j].xBullet >= Console.WindowWidth - 2)
+                        {
+                            bullets.RemoveAt(j);
+                            j--;
+                        }
+                    }
                 }
             }
-
+            frameAmount += 2;
         }
     }
 }
