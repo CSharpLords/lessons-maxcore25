@@ -13,7 +13,7 @@ namespace Tanks
         static PlayerTank playerTank = new PlayerTank();
         static List<Bullet> bullets = new List<Bullet>();
         static List<Tank> enemyTanks = new List<Tank>();
-        static int frameAmount = 100;
+        static int frameAmount = 50;
         static void Main(string[] args)
         {
 
@@ -52,7 +52,7 @@ namespace Tanks
         static void Update()
         {
             playerTank.Draw();
-            if (frameAmount == 100)
+            if (frameAmount == 50)
             {
                 frameAmount = 0;
                 enemyTanks.Add(new Tank());

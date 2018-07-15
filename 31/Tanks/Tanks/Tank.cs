@@ -11,15 +11,20 @@ namespace Tanks
         public char tankBarrel = '|';
         public int x;
         public int y;
+        static Random rand = new Random();
+        public Tank()
+        {
+            x = rand.Next(0, Console.WindowWidth - 1);
+            y = rand.Next(1, Console.WindowHeight - 1);
+        }
         public void DrawEnemyTank()
         {
-            Random rand = new Random();
-            int randX = rand.Next(0, Console.WindowWidth - 1);
-            int randY = rand.Next(1, Console.WindowHeight - 1);
+           
+            
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.SetCursorPosition(randX, randY);
+            Console.SetCursorPosition(x, y);
             Console.Write(enemyTank);
-            Console.SetCursorPosition(randX, randY - 1);
+            Console.SetCursorPosition(x, y - 1);
             Console.Write(tankBarrel);
             Console.ForegroundColor = ConsoleColor.White;
         }
