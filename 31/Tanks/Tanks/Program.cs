@@ -55,23 +55,26 @@ namespace Tanks
             if (frameAmount == 100)
             {
                 frameAmount = 0;
-                for (int i = 0; i < enemyTanks.Count; i++)
-                {
-                    enemyTanks.Add(new Tank());
-                    enemyTanks[i].DrawEnemyTank();
-                }
+                enemyTanks.Add(new Tank());
+
+            }
+            for (int i = 0; i < enemyTanks.Count; i++)
+            {
+                enemyTanks[i].DrawEnemyTank();
             }
             for (int j = 0; j < bullets.Count; j++)
             {
-                if (bullets[j].yBullet <= Console.WindowTop - 2)
+                if (bullets[j].yBullet <= Console.WindowTop + 2)
                 {
                     bullets.RemoveAt(j);
                     j--;
+                    continue;
                 }
-                if (bullets[j].yBullet >= Console.WindowHeight + 2)
+                if (bullets[j].yBullet >= Console.WindowHeight - 2)
                 {
                     bullets.RemoveAt(j);
                     j--;
+                    continue;
                 }
                 if (bullets[j].yBullet > 0 && bullets[j].yBullet < Console.WindowHeight && bullets[j].xBullet > 0 && bullets[j].xBullet < Console.WindowWidth)
                 {
@@ -81,16 +84,18 @@ namespace Tanks
                 {
                     bullets.RemoveAt(j);
                     j--;
+                    continue;
                 }
                 if (bullets[j].xBullet >= Console.WindowWidth - 2)
                 {
                     bullets.RemoveAt(j);
                     j--;
+                    continue;
                 }
             }
 
 
-            frameAmount += 2;
+            frameAmount += 1;
         }
     }
 }
