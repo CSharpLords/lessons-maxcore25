@@ -60,37 +60,37 @@ namespace Tanks
                     enemyTanks.Add(new Tank());
                     enemyTanks[i].DrawEnemyTank();
 
-
-
-                    for (int j = 0; j < bullets.Count; j++)
-                    {
-                        if (bullets[j].yBullet <= Console.WindowTop - 2)
-                        {
-                            bullets.RemoveAt(j);
-                            j--;
-                        }
-                        if (bullets[j].yBullet >= Console.WindowHeight + 2)
-                        {
-                            bullets.RemoveAt(j);
-                            j--;
-                        }
-                        if (bullets[j].yBullet > 0 && bullets[j].yBullet < Console.WindowHeight && bullets[j].xBullet > 0 && bullets[j].xBullet < Console.WindowWidth)
-                        {
-                            bullets[j].Shoot();
-                        }
-                        if (bullets[j].xBullet <= Console.WindowLeft + 2)
-                        {
-                            bullets.RemoveAt(j);
-                            j--;
-                        }
-                        if (bullets[j].xBullet >= Console.WindowWidth - 2)
-                        {
-                            bullets.RemoveAt(j);
-                            j--;
-                        }
-                    }
                 }
             }
+            for (int j = 0; j < bullets.Count; j++)
+            {
+                if (bullets[j].yBullet <= Console.WindowTop - 2)
+                {
+                    bullets.RemoveAt(j);
+                    j--;
+                }
+                if (bullets[j].yBullet >= Console.WindowHeight + 2)
+                {
+                    bullets.RemoveAt(j);
+                    j--;
+                }
+                if (bullets[j].yBullet > 0 && bullets[j].yBullet < Console.WindowHeight && bullets[j].xBullet > 0 && bullets[j].xBullet < Console.WindowWidth)
+                {
+                    bullets[j].Shoot();
+                }
+                if (bullets[j].xBullet <= Console.WindowLeft + 2)
+                {
+                    bullets.RemoveAt(j);
+                    j--;
+                }
+                if (bullets[j].xBullet >= Console.WindowWidth - 2)
+                {
+                    bullets.RemoveAt(j);
+                    j--;
+                }
+            }
+
+
             frameAmount += 2;
         }
     }
