@@ -55,11 +55,10 @@ namespace Tanks
             if (frameAmount == 100)
             {
                 frameAmount = 0;
-                for (int i = 0; i < 1; i++)
+                for (int i = 0; i < enemyTanks.Count; i++)
                 {
                     enemyTanks.Add(new Tank());
                     enemyTanks[i].DrawEnemyTank();
-
                 }
             }
             for (int j = 0; j < bullets.Count; j++)

@@ -15,7 +15,7 @@ namespace Tanks
         {
             Random rand = new Random();
             int randX = rand.Next(0, Console.WindowWidth - 1);
-            int randY = rand.Next(0, Console.WindowHeight - 1);
+            int randY = rand.Next(1, Console.WindowHeight - 1);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.SetCursorPosition(randX, randY);
             Console.Write(enemyTank);
