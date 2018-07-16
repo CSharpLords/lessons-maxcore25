@@ -16,7 +16,7 @@ namespace Tanks
         static int frameAmount = 50;
         static void Main(string[] args)
         {
-
+            Console.Title = "Tanks";
             while (true)
             {
                 while (!Console.KeyAvailable)
@@ -61,6 +61,7 @@ namespace Tanks
             for (int i = 0; i < enemyTanks.Count; i++)
             {
                 enemyTanks[i].DrawEnemyTank();
+                //enemyTanks[i].EnemyTankGoesUp();
             }
             for (int j = 0; j < bullets.Count; j++)
             {
