@@ -8,14 +8,14 @@ namespace Tanks
     class Bullet
     {
         public char bullet = 'o';
-        public int xBullet;
-        public int yBullet;
+        public int x;
+        public int y;
         public int direction;
 
         public Bullet(int x, int y , int direction)
         {
-            xBullet = x;
-            yBullet = y;
+            this.x = x;
+            this.y = y;
             this.direction = direction;
         }
         public Bullet()
@@ -23,28 +23,28 @@ namespace Tanks
 
         }
 
-        public void Shoot()
+        public void Fly()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             if (direction == 1)
             {
-                yBullet -= 2;
-                Console.SetCursorPosition(xBullet, yBullet);
+                y -= 1;
+                Console.SetCursorPosition(x, y);
             }
             if (direction == 2)
             {
-                yBullet += 2;
-                Console.SetCursorPosition(xBullet, yBullet);
+                y += 1;
+                Console.SetCursorPosition(x, y);
             }
             if (direction == 3)
             {
-                xBullet -= 2;
-                Console.SetCursorPosition(xBullet, yBullet);
+                x -= 1;
+                Console.SetCursorPosition(x, y);
             }
             if (direction == 4)
             {
-                xBullet += 2;
-                Console.SetCursorPosition(xBullet, yBullet);
+                x += 1;
+                Console.SetCursorPosition(x, y);
             }
             
             Console.Write(bullet);

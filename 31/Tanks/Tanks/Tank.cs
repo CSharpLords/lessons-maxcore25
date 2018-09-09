@@ -11,59 +11,69 @@ namespace Tanks
         public char tankBarrel = '|';
         public int x;
         public int y;
-        static Random randomPosition = new Random();
-        static Random randomDistance = new Random();
-        static Random randomDirection = new Random();
-        public int distance;
+        static Random random = new Random();
+        public int speed;
         public int direction;
+        private int frameAmount;
         public Tank()
         {
-            x = randomPosition.Next(0, Console.WindowWidth - 1);
-            y = randomPosition.Next(1, Console.WindowHeight - 1);
-            distance = randomDistance.Next(0, 12);
-            direction = randomDirection.Next(1, 5);
+            x = random.Next(0, Console.WindowWidth - 1);
+            y = random.Next(1, Console.WindowHeight - 1);
+            speed = random.Next(0, 4);
+            direction = random.Next(1, 5);
         }
 
-        public void DrawEnemyTank()
+        public void Draw()
         {
+            frameAmount++;
+            if (frameAmount % 10 == 0)
+            {
+                Move();
+            }
+            if (frameAmount % 20 == 0)
+            {
+                speed = random.Next(0, 4);
+                direction = random.Next(1, 5);
+            }
             Console.ForegroundColor = ConsoleColor.Red;
-            EnemyTankDirects();
+            Align();
+            
             Console.Write(tankBarrel);
             Console.SetCursorPosition(x, y);
             Console.Write(enemyTank);
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
-        public void EnemyTankGoesUp()
+        public void GoUp()
         {
-            for (int i = 0; i < distance; i++)
+            for (int i = 0; i < speed; i++)
             {
                 y--;
             }
         }
-        public void EnemyTankGoesDown()
+        public void GoDown()
         {
-            for (int i = 0; i < distance; i++)
+            for (int i = 0; i < speed; i++)
             {
                 y++;
             }
         }
-        public void EnemyTankGoesLeft()
+        public void GoLeft()
         {
-            for (int i = 0; i < distance; i++)
+            for (int i = 0; i < speed; i++)
             {
                 x--;
             }
         }
-        public void EnemyTankGoesRight()
+        public void GoRight()
         {
-            for (int i = 0; i < distance; i++)
+            for (int i = 0; i < speed; i++)
             {
                 x++;
             }
         }
 
-        public void EnemyTankDirects()
+        public void Align()
         {
             if (direction == 1)
             {
@@ -84,6 +94,25 @@ namespace Tanks
             {
                 Console.SetCursorPosition(x + 1, y);
                 tankBarrel = '-';
+            }
+        }
+        public void Move()
+        {
+            if (direction == 1)
+            {
+                GoUp();
+            }
+            if (direction == 2)
+            {
+                GoDown();
+            }
+            if (direction == 3)
+            {
+                GoLeft();
+            }
+            if (direction == 4)
+            {
+                GoRight();
             }
         }
     }

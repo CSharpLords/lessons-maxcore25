@@ -13,7 +13,7 @@ namespace Tanks
         static PlayerTank playerTank = new PlayerTank();
         static List<Bullet> bullets = new List<Bullet>();
         static List<Tank> enemyTanks = new List<Tank>();
-        static int frameAmount = 50;
+        static int frameAmount = 100;
         static void Main(string[] args)
         {
             Console.Title = "Tanks";
@@ -23,7 +23,7 @@ namespace Tanks
                 {
                     Console.Clear();
                     Update();
-                    Thread.Sleep(100);
+                    Thread.Sleep(50);
                 }
 
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
@@ -52,7 +52,7 @@ namespace Tanks
         static void Update()
         {
             playerTank.Draw();
-            if (frameAmount == 50)
+            if (frameAmount == 100)
             {
                 frameAmount = 0;
                 enemyTanks.Add(new Tank());
@@ -60,43 +60,56 @@ namespace Tanks
             }
             for (int i = 0; i < enemyTanks.Count; i++)
             {
-                enemyTanks[i].DrawEnemyTank();
-                //enemyTanks[i].EnemyTankGoesUp();
+                enemyTanks[i].Draw();
             }
+
             for (int j = 0; j < bullets.Count; j++)
             {
-                if (bullets[j].yBullet <= Console.WindowTop + 2)
+                bullets[j].Fly();
+                for (int i = 0; i < enemyTanks.Count; i++)
+                {
+                    if (bullets[j].x == enemyTanks[i].x && bullets[j].y == enemyTanks[i].y)
+                    {
+                        bullets.RemoveAt(j);
+                        j--;
+                        enemyTanks.RemoveAt(i);
+                        i--;
+                        break;
+                    }
+                }  
+            }
+            frameAmount += 1;
+            CheckBorders();
+        }
+        private static void CheckBorders()
+        {
+            for (int j = 0; j < bullets.Count; j++)
+            {
+                if (bullets[j].y <= Console.WindowTop + 1)
                 {
                     bullets.RemoveAt(j);
                     j--;
                     continue;
                 }
-                if (bullets[j].yBullet >= Console.WindowHeight - 2)
+                if (bullets[j].y >= Console.WindowHeight - 1)
                 {
                     bullets.RemoveAt(j);
                     j--;
                     continue;
                 }
-                if (bullets[j].yBullet > 0 && bullets[j].yBullet < Console.WindowHeight && bullets[j].xBullet > 0 && bullets[j].xBullet < Console.WindowWidth)
-                {
-                    bullets[j].Shoot();
-                }
-                if (bullets[j].xBullet <= Console.WindowLeft + 2)
+                if (bullets[j].x <= Console.WindowLeft + 1)
                 {
                     bullets.RemoveAt(j);
                     j--;
                     continue;
                 }
-                if (bullets[j].xBullet >= Console.WindowWidth - 2)
+                if (bullets[j].x >= Console.WindowWidth - 1)
                 {
                     bullets.RemoveAt(j);
                     j--;
                     continue;
                 }
             }
-
-
-            frameAmount += 1;
         }
     }
 }
