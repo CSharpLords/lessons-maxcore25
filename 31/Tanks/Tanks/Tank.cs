@@ -129,68 +129,24 @@ namespace Tanks
         }
         public void CheckBordersForEnemyTanks()
         {
-            while (y <= 0)
+            if (y <= 0)
             {
-                if (direction == 2)
-                {
-                    GoDown();
-                }
-                if (direction == 3)
-                {
-                    GoLeft();
-                }
-                if (direction == 4)
-                {
-                    GoRight();
-                }
+                y = Console.WindowHeight - 1;
             }
 
-            while (y >= Console.WindowHeight - 1)
+            if (y >= Console.WindowHeight - 1)
             {
-                if (direction == 1)
-                {
-                    GoUp();
-                }
-                if (direction == 3)
-                {
-                    GoLeft();
-                }
-                if (direction == 4)
-                {
-                    GoRight();
-                }
+                y = 0;
             }
 
-            while (x <= 0)
+            if (x <= 0)
             {
-                if (direction == 1)
-                {
-                    GoUp();
-                }
-                if (direction == 2)
-                {
-                    GoDown();
-                }
-                if (direction == 4)
-                {
-                    GoRight();
-                }
+                x = Console.WindowWidth - 1;
             }
 
-            while (x >= Console.WindowWidth - 1)
+            if (x >= Console.WindowWidth - 1)
             {
-                if (direction == 1)
-                {
-                    GoUp();
-                }
-                if (direction == 2)
-                {
-                    GoDown();
-                }
-                if (direction == 3)
-                {
-                    GoLeft();
-                }
+                x = 0;
             }
 
         }
