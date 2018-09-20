@@ -94,7 +94,7 @@ namespace Tanks
             }
             if (direction == 3)
             {
-                Console.SetCursorPosition(x - 1, y);
+                Console.SetCursorPosition(x - 1, y); 
                 tankBarrel = '-';
             }
             if (direction == 4)
@@ -108,28 +108,28 @@ namespace Tanks
             
             if (direction == 1)
             {
-                GoUp();
                 CheckBordersForEnemyTanks();
+                GoUp();
             }
             if (direction == 2)
             {
-                GoDown();
                 CheckBordersForEnemyTanks();
+                GoDown();
             }
             if (direction == 3)
             {
-                GoLeft();
                 CheckBordersForEnemyTanks();
+                GoLeft();
             }
             if (direction == 4)
             {
-                GoRight();
                 CheckBordersForEnemyTanks();
+                GoRight(); 
             }
         }
         public void CheckBordersForEnemyTanks()
         {
-            if (y <= 0)
+            if (y <= 0) 
             {
                 y = Console.WindowHeight - 1;
             }
