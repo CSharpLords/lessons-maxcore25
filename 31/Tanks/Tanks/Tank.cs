@@ -15,12 +15,15 @@ namespace Tanks
         public int speed;
         public int direction;
         private int frameAmount;
+        public int bulletAmount;
+        static List<Bullet> bullets = new List<Bullet>();
         public Tank()
         {
             x = random.Next(0, Console.WindowWidth - 1);
             y = random.Next(1, Console.WindowHeight - 1);
             speed = random.Next(0, 4);
             direction = random.Next(1, 5);
+            bulletAmount = random.Next(2, 6);
         }
 
         public void Draw()
@@ -35,9 +38,13 @@ namespace Tanks
                 speed = random.Next(0, 4);
                 direction = random.Next(1, 5);
             }
+            if (frameAmount % 30 == 0)
+            {
+                Shoot();
+            }
             Console.ForegroundColor = ConsoleColor.Red;
             Align();
-            
+
             Console.Write(tankBarrel);
             Console.SetCursorPosition(x, y);
             Console.Write(enemyTank);
@@ -98,21 +105,101 @@ namespace Tanks
         }
         public void Move()
         {
+            
             if (direction == 1)
             {
                 GoUp();
+                CheckBordersForEnemyTanks();
             }
             if (direction == 2)
             {
                 GoDown();
+                CheckBordersForEnemyTanks();
             }
             if (direction == 3)
             {
                 GoLeft();
+                CheckBordersForEnemyTanks();
             }
             if (direction == 4)
             {
                 GoRight();
+                CheckBordersForEnemyTanks();
+            }
+        }
+        public void CheckBordersForEnemyTanks()
+        {
+            while (y <= 0)
+            {
+                if (direction == 2)
+                {
+                    GoDown();
+                }
+                if (direction == 3)
+                {
+                    GoLeft();
+                }
+                if (direction == 4)
+                {
+                    GoRight();
+                }
+            }
+
+            while (y >= Console.WindowHeight - 1)
+            {
+                if (direction == 1)
+                {
+                    GoUp();
+                }
+                if (direction == 3)
+                {
+                    GoLeft();
+                }
+                if (direction == 4)
+                {
+                    GoRight();
+                }
+            }
+
+            while (x <= 0)
+            {
+                if (direction == 1)
+                {
+                    GoUp();
+                }
+                if (direction == 2)
+                {
+                    GoDown();
+                }
+                if (direction == 4)
+                {
+                    GoRight();
+                }
+            }
+
+            while (x >= Console.WindowWidth - 1)
+            {
+                if (direction == 1)
+                {
+                    GoUp();
+                }
+                if (direction == 2)
+                {
+                    GoDown();
+                }
+                if (direction == 3)
+                {
+                    GoLeft();
+                }
+            }
+
+        }
+        public void Shoot()
+        {
+            bulletAmount = bullets.Count;
+            for (int i = 0; i < bullets.Count; i++)
+            {
+                bullets[i].Fly();
             }
         }
     }

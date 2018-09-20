@@ -79,9 +79,9 @@ namespace Tanks
                 }  
             }
             frameAmount += 1;
-            CheckBorders();
+            CheckBordersForBullets();
         }
-        private static void CheckBorders()
+        private static void CheckBordersForBullets()
         {
             for (int j = 0; j < bullets.Count; j++)
             {
@@ -111,5 +111,11 @@ namespace Tanks
                 }
             }
         }
+        //private static void CheckBordersForEnemyTanks()
+        //{
+            //for (int i = 0; i < enemyTanks.Count; i++)
+            //{  
+            //}
+        //}
     }
 }
