@@ -158,8 +158,15 @@ namespace Tanks
         private static void FinishHim()
         {
             Console.Clear();
-            Console.WriteLine("Game Over");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2);
+            Console.Write("GAME ");
+            Thread.Sleep(1000);
+            Console.WriteLine("OVER");
+            Thread.Sleep(1000);
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 5, Console.WindowHeight / 2 + 1);
             Console.WriteLine("Press R to restart");
+            Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2 + 3);
             string restarting = Console.ReadLine().ToLower();
             if (restarting == "r")
             {
@@ -168,6 +175,24 @@ namespace Tanks
                 enemyTanks.Clear();
                 frameAmount = 0;
                 Tank.bullets.Clear();
+            }
+            else
+            {
+                Console.Clear();
+                Thread.Sleep(100);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.SetCursorPosition(Console.WindowWidth / 2 - 5, Console.WindowHeight / 2);
+                Console.WriteLine("Please, press R to restart");
+                Console.SetCursorPosition(Console.WindowWidth / 2 + 5, Console.WindowHeight / 2 + 3);
+                restarting = Console.ReadLine().ToLower();
+                if (restarting == "r")
+                {
+                    playerTank = new PlayerTank();
+                    bullets.Clear();
+                    enemyTanks.Clear();
+                    frameAmount = 0;
+                    Tank.bullets.Clear();
+                }
             }
         }
     }
