@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Tanks
 {
@@ -28,22 +25,22 @@ namespace Tanks
             Console.ForegroundColor = ConsoleColor.Yellow;
             if (direction == 1)
             {
-                y -= 2;
+                y -= 1;
                 Console.SetCursorPosition(x, y);
             }
             if (direction == 2)
             {
-                y += 2;
+                y += 1;
                 Console.SetCursorPosition(x, y);
             }
             if (direction == 3)
             {
-                x -= 2;
+                x -= 1;
                 Console.SetCursorPosition(x, y);
             }
             if (direction == 4)
             {
-                x += 2;
+                x += 1;
                 Console.SetCursorPosition(x, y);
             }
             

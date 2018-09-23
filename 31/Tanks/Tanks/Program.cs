@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Collections.Generic;
 
 
 namespace Tanks
@@ -14,6 +11,7 @@ namespace Tanks
         static List<Bullet> bullets = new List<Bullet>();
         static List<Tank> enemyTanks = new List<Tank>();
         static int frameAmount = 100;
+
         static void Main(string[] args)
         {
             Console.Title = "Tanks";
@@ -80,6 +78,7 @@ namespace Tanks
             }
             frameAmount += 1;
             CheckBordersForBullets();
+            CheckHit();
         }
         private static void CheckBordersForBullets()
         {
@@ -111,11 +110,65 @@ namespace Tanks
                 }
             }
         }
-        //private static void CheckBordersForEnemyTanks()
-        //{
-            //for (int i = 0; i < enemyTanks.Count; i++)
-            //{  
-            //}
-        //}
+        private static void CheckHit()
+        {
+            CheckBorders();
+            for (int i = 0; i < Tank.bullets.Count; i++)
+            {
+                Tank.bullets[i].Fly();
+                if (Tank.bullets[i].x == playerTank.x && Tank.bullets[i].y == playerTank.y)
+                {
+                    Tank.bullets.RemoveAt(i);
+                    i--;
+                    FinishHim();
+                    break;
+                }
+            }
+        }
+        private static void CheckBorders()
+        {
+            for (int j = 0; j < Tank.bullets.Count; j++)
+            {
+                if (Tank.bullets[j].y <= Console.WindowTop + 1)
+                {
+                    Tank.bullets.RemoveAt(j);
+                    j--;
+                    continue;
+                }
+                if (Tank.bullets[j].y >= Console.WindowHeight - 1)
+                {
+                    Tank.bullets.RemoveAt(j);
+                    j--;
+                    continue;
+                }
+                if (Tank.bullets[j].x <= Console.WindowLeft + 1)
+                {
+                    Tank.bullets.RemoveAt(j);
+                    j--;
+                    continue;
+                }
+                if (Tank.bullets[j].x >= Console.WindowWidth - 1)
+                {
+                    Tank.bullets.RemoveAt(j);
+                    j--;
+                    continue;
+                }
+            }
+        }
+        private static void FinishHim()
+        {
+            Console.Clear();
+            Console.WriteLine("Game Over");
+            Console.WriteLine("Press R to restart");
+            string restarting = Console.ReadLine().ToLower();
+            if (restarting == "r")
+            {
+                playerTank = new PlayerTank();
+                bullets.Clear();
+                enemyTanks.Clear();
+                frameAmount = 0;
+                Tank.bullets.Clear();
+            }
+        }
     }
 }

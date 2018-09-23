@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Tanks
 {
@@ -15,20 +13,20 @@ namespace Tanks
         public int speed;
         public int direction;
         private int frameAmount;
-        public int bulletAmount;
-        static List<Bullet> bullets = new List<Bullet>();
+        public static List<Bullet> bullets = new List<Bullet>();
         public Tank()
         {
             x = random.Next(0, Console.WindowWidth - 1);
             y = random.Next(1, Console.WindowHeight - 1);
             speed = random.Next(0, 4);
             direction = random.Next(1, 5);
-            bulletAmount = random.Next(2, 6);
         }
 
         public void Draw()
         {
             frameAmount++;
+
+            Console.ForegroundColor = ConsoleColor.Red;
             if (frameAmount % 10 == 0)
             {
                 Move();
@@ -42,9 +40,8 @@ namespace Tanks
             {
                 Shoot();
             }
-            Console.ForegroundColor = ConsoleColor.Red;
+            CheckBordersForEnemyTanks();
             Align();
-
             Console.Write(tankBarrel);
             Console.SetCursorPosition(x, y);
             Console.Write(enemyTank);
@@ -108,22 +105,18 @@ namespace Tanks
             
             if (direction == 1)
             {
-                CheckBordersForEnemyTanks();
                 GoUp();
             }
             if (direction == 2)
             {
-                CheckBordersForEnemyTanks();
                 GoDown();
             }
             if (direction == 3)
             {
-                CheckBordersForEnemyTanks();
                 GoLeft();
             }
             if (direction == 4)
             {
-                CheckBordersForEnemyTanks();
                 GoRight(); 
             }
         }
@@ -131,32 +124,28 @@ namespace Tanks
         {
             if (y <= 0) 
             {
-                y = Console.WindowHeight - 1;
+                y = Console.WindowHeight - 2;
             }
 
             if (y >= Console.WindowHeight - 1)
             {
-                y = 0;
+                y = 1;
             }
 
             if (x <= 0)
             {
-                x = Console.WindowWidth - 1;
+                x = Console.WindowWidth - 2;
             }
 
             if (x >= Console.WindowWidth - 1)
             {
-                x = 0;
+                x = 1;
             }
 
         }
         public void Shoot()
         {
-            bulletAmount = bullets.Count;
-            for (int i = 0; i < bullets.Count; i++)
-            {
-                bullets[i].Fly();
-            }
+            bullets.Add(new Bullet(x, y, direction));
         }
     }
 }
