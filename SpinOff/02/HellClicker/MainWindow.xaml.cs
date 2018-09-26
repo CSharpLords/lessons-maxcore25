@@ -25,23 +25,24 @@ namespace HellClicker
             InitializeComponent();
         }
 
-        private void FirstPlayerClick(object sender, MouseButtonEventArgs e)
+        private void FirstPlayerClick(object sender, KeyEventArgs e)
+        {
+            
+            ProgressBar.Value++;
+            if (ProgressBar.Value == 100)
+            {
+                VictoryLabel.Content = "player one win";
+                Win.KeyDown += FirstPlayerClick;
+            }
+        }
+
+        private void SecondPlayerClick(object sender,  MouseButtonEventArgs e)
         {
             ProgressBar.Value--;
             if (ProgressBar.Value == 0)
             {
                 VictoryLabel.Content = "player two win";
-                Win.KeyDown -= SecondPlayerClick;
-            }
-        }
-
-        private void SecondPlayerClick(object sender, KeyEventArgs e)
-        {
-            ProgressBar.Value++;
-            if (ProgressBar.Value == 100)
-            {
-                VictoryLabel.Content = "player one win";
-
+                Win.KeyDown += SecondPlayerClick;
             }
         }
     }
