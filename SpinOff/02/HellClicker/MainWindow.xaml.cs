@@ -31,7 +31,7 @@ namespace HellClicker
             if (ProgressBar.Value == 100)
             {
                 VictoryLabel.Content = "player 1 won";
-                //Win.KeyDown -= SecondPlayerClick;
+                Win.MouseLeftButtonDown-= SecondPlayerClick;
             }
         }
         

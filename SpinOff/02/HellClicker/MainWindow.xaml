@@ -12,4 +12,5 @@
         <Label Content="2 player" HorizontalAlignment="Left" Margin="527,81,0,0" VerticalAlignment="Top" Height="118" Width="228" FontSize="48"/>
         <Label x:Name="VictoryLabel" Content="" HorizontalAlignment="Left" Margin="40,294,0,0" VerticalAlignment="Top" Width="715" Height="87" FontSize="48" HorizontalContentAlignment="Center"/>
     </Grid>
+    
 </Window>
