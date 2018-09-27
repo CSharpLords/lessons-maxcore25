@@ -5,10 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HellClicker"
         mc:Ignorable="d"
-        KeyDown="FirstPlayerClick"
-        MouseLeftButtonDown="SecondPlayerClick"
         Title="MainWindow" Height="450" Width="800">
-    <Grid >
+    <Grid MouseLeftButtonDown="SecondPlayerClick" KeyDown="FirstPlayerClick" >
         <ProgressBar x:Name="ProgressBar" HorizontalAlignment="Left" Height="61" Margin="40,204,0,0" VerticalAlignment="Top" Width="715" Value="50" />
         <Label Content="1 player" HorizontalAlignment="Left" Margin="40,81,0,0" VerticalAlignment="Top" Height="118" Width="228" FontSize="48"/>
         <Label Content="2 player" HorizontalAlignment="Left" Margin="527,81,0,0" VerticalAlignment="Top" Height="118" Width="228" FontSize="48"/>
