@@ -33,6 +33,7 @@ namespace Paint2018
             {
                 Line line = new Line();
                 line.Stroke = new SolidColorBrush(ColorPicker.SelectedColor ?? Brushes.Black.Color);
+                line.w = 10;
                 line.X1 = currentPoint.X;
                 line.Y1 = currentPoint.Y;
                 line.X2 = e.GetPosition(Canvas).X;

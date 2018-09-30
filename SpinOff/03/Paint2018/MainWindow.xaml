@@ -12,6 +12,7 @@
         <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,22,0,0"/>
 
         <xctk:ColorPicker x:Name="ColorPicker" HorizontalAlignment="Left" Margin="106,22,0,0" VerticalAlignment="Top" Width="110"/>
+        <Slider HorizontalAlignment="Left" Margin="246,22,0,0" VerticalAlignment="Top" Width="149"/>
 
     </Grid>
 </Window>
