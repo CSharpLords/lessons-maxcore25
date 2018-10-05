@@ -7,12 +7,12 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="Paint2018.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Canvas Background="LightGray" x:Name="Canvas" HorizontalAlignment="Left" Height="360" VerticalAlignment="Top" Width="792" Margin="0,59,0,0" MouseMove="Canvas_MouseMove" MouseLeftButtonDown="Canvas_MouseLeftButtonDown"/>
+    <Grid x:Name="Grid">
+        <Canvas Background="LightGray" x:Name="Canvas" HorizontalAlignment="Left" Height="360" VerticalAlignment="Top" Width="792" Margin="0,59,0,0" MouseMove="Canvas_MouseMove" MouseLeftButtonDown="Canvas_MouseLeftButtonDown" Cursor="Arrow"/>
         <Button x:Name="Eraser" Content="Eraser" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,22,0,0" Click="Eraser_Click"/>
 
         <xctk:ColorPicker x:Name="ColorPicker" HorizontalAlignment="Left" Margin="106,22,0,0" VerticalAlignment="Top" Width="110"/>
-        <Slider x:Name="BrushSize" HorizontalAlignment="Left" Margin="246,22,0,0" VerticalAlignment="Top" Width="149" ValueChanged="BrushSize_ValueChanged"/>
+        <Slider x:Name="BrushSize" HorizontalAlignment="Left" Margin="246,22,0,0" VerticalAlignment="Top" Width="149" ValueChanged="BrushSize_ValueChanged" Value="-3" TickPlacement="BottomRight" TickFrequency="1" Minimum="1"/>
 
     </Grid>
 </Window>
