@@ -33,7 +33,7 @@ namespace Paint2018
             {
                 Line line = new Line();
                 line.Stroke = new SolidColorBrush(ColorPicker.SelectedColor ?? Brushes.Black.Color);
-                line.w = 10;
+                line.StrokeThickness = 1;
                 line.X1 = currentPoint.X;
                 line.Y1 = currentPoint.Y;
                 line.X2 = e.GetPosition(Canvas).X;
@@ -49,6 +49,26 @@ namespace Paint2018
         private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             currentPoint = e.GetPosition(Canvas);
+        }
+
+        private void Eraser_Click(object sender, RoutedEventArgs e)
+        {
+            Line line = new Line();
+            line.Stroke = new SolidColorBrush(ColorPicker.SelectedColor ?? Brushes.Black.Color);
+            line.StrokeThickness = 1;
+            line.X1 = currentPoint.X;
+            line.Y1 = currentPoint.Y;
+            line.X2 = e.GetPosition(Canvas).X;
+            line.Y2 = e.GetPosition(Canvas).Y;
+
+            currentPoint = e.GetPosition(Canvas);
+
+            Canvas.Children.Add(line);
+        }
+
+        private void BrushSize_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
         }
     }
 }
