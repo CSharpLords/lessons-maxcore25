@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace Paint2018
 {
@@ -21,67 +23,64 @@ namespace Paint2018
     public partial class MainWindow : Window
     {
         Point currentPoint;
-        Point eraserCurrentPoint;
-        static bool switchOnEraser = false;
-        static byte clicksAmount = 0;
+        bool switchOnEraser = false;
+        Ellipse circle = new Ellipse();
         public MainWindow()
         {
             InitializeComponent();
+            circle.StrokeThickness = 2;
+            circle.Stroke = Brushes.Black;
+            Canvas.Children.Add(circle);
+            Panel.SetZIndex(circle, 100);
         }
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
         {
+            Mouse.OverrideCursor = Cursors.None;
+            circle.Visibility = Visibility.Visible;
+            
+            Line line = new Line();
             if (e.LeftButton == MouseButtonState.Pressed && switchOnEraser == false)
             {
-                Mouse.OverrideCursor = Cursors.Pen;
-                Line line = new Line();
                 line.Stroke = new SolidColorBrush(ColorPicker.SelectedColor ?? Brushes.Black.Color);
-                line.StrokeThickness = 1;
-                line.X1 = currentPoint.X;
-                line.Y1 = currentPoint.Y;
-                line.X2 = e.GetPosition(Canvas).X;
-                line.Y2 = e.GetPosition(Canvas).Y;
-
-                currentPoint = e.GetPosition(Canvas);
-
-                Canvas.Children.Add(line);
             }
+
             if (switchOnEraser == true && e.LeftButton == MouseButtonState.Pressed)
             {
-                Mouse.OverrideCursor = Cursors.Cross;
-                Line line = new Line();
                 line.Stroke = new SolidColorBrush(Brushes.LightGray.Color);
-                line.StrokeThickness = 5;
-                line.X1 = eraserCurrentPoint.X;
-                line.Y1 = eraserCurrentPoint.Y;
-                line.X2 = e.GetPosition(Canvas).X;
-                line.Y2 = e.GetPosition(Canvas).Y;
-
-                eraserCurrentPoint = e.GetPosition(Canvas);
-
-                Canvas.Children.Add(line);
             }
+
+            line.StrokeThickness = BrushSize.Value;
+            line.StrokeEndLineCap = PenLineCap.Round;
+            line.X1 = currentPoint.X;
+            line.Y1 = currentPoint.Y;
+            line.X2 = e.GetPosition(Canvas).X;
+            line.Y2 = e.GetPosition(Canvas).Y;
+
+            currentPoint = e.GetPosition(Canvas);
+            circle.Width = BrushSize.Value;
+            circle.Height = BrushSize.Value;
+            if (BrushSize.Value < 6)
+            {
+                circle.Width = 6;
+                circle.Height = 6;
+            }
+            Canvas.SetLeft(circle, currentPoint.X);
+            Canvas.SetTop(circle, currentPoint.Y);
+
+            Canvas.Children.Add(line);
         }
 
         private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (switchOnEraser == true)
-            {
-                eraserCurrentPoint = e.GetPosition(Canvas);
-            }
-            else
-            {
-                currentPoint = e.GetPosition(Canvas);
-            }
+            currentPoint = e.GetPosition(Canvas);
         }
 
         private void Eraser_Click(object sender, RoutedEventArgs e)
         {
-            clicksAmount++;
-            if (clicksAmount == 2)
+            if (switchOnEraser == true)
             {
                 switchOnEraser = false;
-                clicksAmount = 0;
                 Eraser.Content = "Eraser";
                 Mouse.OverrideCursor = Cursors.Pen;
             }
@@ -94,9 +93,49 @@ namespace Paint2018
 
         }
 
-        private void BrushSize_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void Canvas_MouseLeave(object sender, MouseEventArgs e)
         {
+            Mouse.OverrideCursor = Cursors.Arrow;
+            circle.Visibility = Visibility.Hidden;
+        }
+
+        public void ExportToPng(string path, Canvas surface)
+        {
+            if (path == null) 
+            {
+                return;
+            }
+
+            Size size = new Size(surface.Width, surface.Height);
+            surface.Measure(size);
+            surface.Arrange(new Rect(size));
+
+            RenderTargetBitmap bitmap = new RenderTargetBitmap(
+                (int)size.Width, (int)size.Height, 96d, 96d, PixelFormats.Pbgra32
+            );
+            bitmap.Render(surface);
+            using (FileStream outStream = new FileStream(path, FileMode.Create))
+            {
+                PngBitmapEncoder encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(bitmap));
+                encoder.Save(outStream);
+            }
             
+        }
+
+        private void SaveFile_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.Filter = "picture (*.png)|*.png";
+            if (saveDialog.ShowDialog() == true)
+            {
+                ExportToPng(saveDialog.FileName, Canvas);
+            }
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
