@@ -157,7 +157,7 @@ namespace Paint2018
         {
             if (Canvas.Children.Count > 2)
             {
-                if (MessageBox.Show("Do you want to save picture", "Question", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (MessageBox.Show("Do you want to save picture?", "Question", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     SaveFileOperation();
                 }  
@@ -168,6 +168,7 @@ namespace Paint2018
         private void OpenFileButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "picture (*.png; *.jpg; *.bmp;*jpeg;*jpe)|*.png;*.jpg;*.bmp;*jpeg;*jpe";
             if (openFileDialog.ShowDialog() == true)
             {
                 ImportToCanvas(openFileDialog.FileName);
@@ -176,6 +177,7 @@ namespace Paint2018
 
         public void ImportToCanvas(string filePath)
         {
+            Canvas.Children.Clear();
             ImageBrush brush = new ImageBrush();
             brush.ImageSource = new BitmapImage(new Uri(filePath));
             Canvas.Background = brush;
