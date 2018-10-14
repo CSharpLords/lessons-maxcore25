@@ -23,9 +23,10 @@ namespace Paint2018
     public partial class MainWindow : Window
     {
         Point currentPoint;
-        bool switchOnEraser = false;
         Ellipse circle = new Ellipse();
         Rectangle rectangle = new Rectangle();
+        private Shape tool;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -39,41 +40,41 @@ namespace Paint2018
             rectangle.Stroke = Brushes.Black;
             Canvas.Children.Add(rectangle);
             Panel.SetZIndex(rectangle, 100);
+
+            tool = circle;
         }
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
         {
-            if (switchOnEraser == true)
+            Mouse.OverrideCursor = Cursors.None;
+            tool.Visibility = Visibility.Visible;
+            tool.Width = BrushSize.Value;
+            tool.Height = BrushSize.Value;
+
+            if (BrushSize.Value < 6)
             {
-                Mouse.OverrideCursor = Cursors.None;
-                rectangle.Visibility = Visibility.Visible;
+                tool.Width = 6;
+                tool.Height = 6;
             }
-            else
+
+
+            var toolLocation = e.GetPosition(Canvas);
+            Canvas.SetLeft(tool, toolLocation.X);
+            Canvas.SetTop(tool, toolLocation.Y);
+
+            if (e.LeftButton != MouseButtonState.Pressed)
             {
-                Mouse.OverrideCursor = Cursors.None;
-                circle.Visibility = Visibility.Visible;
+                return;
             }
 
             Line line = new Line();
-
-            if (e.LeftButton == MouseButtonState.Pressed && switchOnEraser == false)
+            if (tool == circle)
             {
-                Mouse.OverrideCursor = Cursors.None;
-                circle.Visibility = Visibility.Visible;
                 line.Stroke = new SolidColorBrush(ColorPicker.SelectedColor ?? Brushes.Black.Color);
-
-                circle.Width = BrushSize.Value;
-                circle.Height = BrushSize.Value;
             }
-
-            if (e.LeftButton == MouseButtonState.Pressed && switchOnEraser == true)
+            else
             {
-                Mouse.OverrideCursor = Cursors.None;
-                rectangle.Visibility = Visibility.Visible;
                 line.Stroke = new SolidColorBrush(Brushes.LightGray.Color);
-
-                rectangle.Width = BrushSize.Value;
-                rectangle.Height = BrushSize.Value;
             }
 
             line.StrokeThickness = BrushSize.Value;
@@ -85,25 +86,6 @@ namespace Paint2018
 
             currentPoint = e.GetPosition(Canvas);
 
-            if (BrushSize.Value < 6)
-            {
-                if (switchOnEraser == false)
-                {
-                    circle.Width = 6;
-                    circle.Height = 6;
-                }
-                else
-                {
-                    rectangle.Width = 6;
-                    rectangle.Height = 6;
-                }
-            }
-            Canvas.SetLeft(circle, currentPoint.X);
-            Canvas.SetTop(circle, currentPoint.Y);
-
-            Canvas.SetLeft(rectangle, currentPoint.X);
-            Canvas.SetTop(rectangle, currentPoint.Y);
-
             Canvas.Children.Add(line);
         }
 
@@ -114,15 +96,15 @@ namespace Paint2018
 
         private void Eraser_Click(object sender, RoutedEventArgs e)
         {
-            if (switchOnEraser == true)
+            if (tool == circle)
             {
-                switchOnEraser = false;
                 Eraser.Content = "Eraser";
+                tool = rectangle;
             }
             else
             {
-                switchOnEraser = true;
                 Eraser.Content = "Brush";
+                tool = circle;
             }
 
         }
@@ -130,8 +112,7 @@ namespace Paint2018
         private void Canvas_MouseLeave(object sender, MouseEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Arrow;
-            rectangle.Visibility = Visibility.Hidden;
-            circle.Visibility = Visibility.Hidden;
+            tool.Visibility = Visibility.Hidden;
         }
 
         public void ExportToPng(string path, Canvas surface)
@@ -143,7 +124,7 @@ namespace Paint2018
 
             Size size = new Size(surface.Width, surface.Height);
             surface.Measure(size);
-            surface.Arrange(new Rect(size));
+            surface.Arrange(new Rect(0, -surface.Margin.Top, size.Width, size.Height));
 
             RenderTargetBitmap bitmap = new RenderTargetBitmap(
                 (int)size.Width, (int)size.Height, 96d, 96d, PixelFormats.Pbgra32
@@ -159,6 +140,11 @@ namespace Paint2018
 
         private void SaveFile_Click(object sender, RoutedEventArgs e)
         {
+            SaveFileOperation();
+        }
+
+        private void SaveFileOperation()
+        {
             SaveFileDialog saveDialog = new SaveFileDialog();
             saveDialog.Filter = "picture (*.png)|*.png";
             if (saveDialog.ShowDialog() == true)
@@ -169,15 +155,14 @@ namespace Paint2018
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Do you want to close application?", "Question", MessageBoxButton.YesNo) == MessageBoxResult.No)
+            if (Canvas.Children.Count > 2)
             {
-                
+                if (MessageBox.Show("Do you want to save picture", "Question", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    SaveFileOperation();
+                }  
             }
-            else
-            {
-                Application.Current.Shutdown();
-            }
-            
+            Application.Current.Shutdown(); 
         }
 
         private void OpenFileButton_Click(object sender, RoutedEventArgs e)
@@ -185,17 +170,14 @@ namespace Paint2018
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
-                ExportToCanvas();
+                ImportToCanvas(openFileDialog.FileName);
             }
-
         }
 
-        public void ExportToCanvas()
+        public void ImportToCanvas(string filePath)
         {
-            Microsoft.Win32.OpenFileDialog dl1 = new Microsoft.Win32.OpenFileDialog();
-            string filename = dl1.FileName;
             ImageBrush brush = new ImageBrush();
-            brush.ImageSource = new BitmapImage(new Uri(@filename, UriKind.Relative));
+            brush.ImageSource = new BitmapImage(new Uri(filePath));
             Canvas.Background = brush;
         }
     }
