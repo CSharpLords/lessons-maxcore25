@@ -169,7 +169,15 @@ namespace Paint2018
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            if (MessageBox.Show("Do you want to close application?", "Question", MessageBoxButton.YesNo) == MessageBoxResult.No)
+            {
+                
+            }
+            else
+            {
+                Application.Current.Shutdown();
+            }
+            
         }
 
         private void OpenFileButton_Click(object sender, RoutedEventArgs e)
