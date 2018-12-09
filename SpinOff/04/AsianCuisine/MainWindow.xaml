@@ -22,9 +22,9 @@
                     <TranslateTransform Y="-0.991"/>
                 </TransformGroup>
             </ListBox.RenderTransform>
-            <local:IconButton Icon="../../AppData/china.png" Label="Китайская"/>
-            <local:IconButton Icon="../../AppData/japan.png " Label="Японская"/>
-            <local:IconButton Icon="../../AppData/southkorea.png " Label="Корейская"/>
+            <local:IconButton x:Name="China" Icon="../../AppData/china.png" Label="Китайская" Click="China_Click" />
+            <local:IconButton x:Name="Japan" Icon="../../AppData/japan.png " Label="Японская" Click="Japan_Click"/>
+            <local:IconButton x:Name="SouthKorea" Icon="../../AppData/southkorea.png " Label="Корейская" Click="SouthKorea_Click"/>
         </ListBox>
         <Label Content="Азиатские кухни:" HorizontalAlignment="Left" Margin="301,28,0,0" VerticalAlignment="Top" Width="196" Height="47" FontSize="20"/>
     </Grid>

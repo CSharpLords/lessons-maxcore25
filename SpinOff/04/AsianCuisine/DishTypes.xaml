@@ -7,9 +7,13 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DishTypes">
-        
+
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="261,205,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="Soups" Content="Супы" HorizontalAlignment="Left" Margin="281,70,0,0" VerticalAlignment="Top" Width="218" Height="47" FontSize="24"/>
+        <Button x:Name="MainDishes" Content="Основные блюда" HorizontalAlignment="Left" Margin="281,133,0,0" VerticalAlignment="Top" Width="218" Height="47" FontSize="24"/>
+        <Button x:Name="ColdSnacks" Content="Холодные закуски" HorizontalAlignment="Left" Margin="281,196,0,0" VerticalAlignment="Top" Width="218" Height="47" FontSize="24"/>
+        <Button x:Name="Desserts" Content="Десерты" HorizontalAlignment="Left" Margin="281,258,0,0" VerticalAlignment="Top" Width="218" Height="47" FontSize="24"/>
+        <Button x:Name="Drinks" Content="Напитки" HorizontalAlignment="Left" Margin="281,321,0,0" VerticalAlignment="Top" Width="218" Height="47" FontSize="24"/>
 
     </Grid>
 </Page>
