@@ -9,11 +9,13 @@
       Title="DishTypes">
 
     <Grid>
-        <Button x:Name="Soups" Content="Супы" HorizontalAlignment="Left" Margin="281,70,0,0" VerticalAlignment="Top" Width="218" Height="47" FontSize="24"/>
-        <Button x:Name="MainDishes" Content="Основные блюда" HorizontalAlignment="Left" Margin="281,133,0,0" VerticalAlignment="Top" Width="218" Height="47" FontSize="24"/>
-        <Button x:Name="ColdSnacks" Content="Холодные закуски" HorizontalAlignment="Left" Margin="281,196,0,0" VerticalAlignment="Top" Width="218" Height="47" FontSize="24"/>
-        <Button x:Name="Desserts" Content="Десерты" HorizontalAlignment="Left" Margin="281,258,0,0" VerticalAlignment="Top" Width="218" Height="47" FontSize="24"/>
-        <Button x:Name="Drinks" Content="Напитки" HorizontalAlignment="Left" Margin="281,321,0,0" VerticalAlignment="Top" Width="218" Height="47" FontSize="24"/>
+        <Grid.Resources>
+            <Style  x:Key="ItemMargin" TargetType="ListBoxItem">
+                <Setter Property="Margin" Value="5" />
+            </Style>
+        </Grid.Resources>
 
+        <ListBox x:Name="DishTypeList" Height="430" Margin="250,10,0,0" Width="294" RenderTransformOrigin="0.5,0.5" BorderThickness="0" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" ItemContainerStyle="{StaticResource ItemMargin}">
+        </ListBox>
     </Grid>
 </Page>

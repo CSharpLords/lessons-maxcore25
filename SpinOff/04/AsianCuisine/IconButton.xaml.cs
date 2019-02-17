@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using AsianCuisine.Model;
 
 namespace AsianCuisine
 {
@@ -35,6 +36,8 @@ namespace AsianCuisine
             set { SetValue(LabelProperty, value); }
         }
 
+        public Guid ID { get; set; }
+
         public IconButton()
         {
             InitializeComponent();
@@ -42,9 +45,8 @@ namespace AsianCuisine
 
         private void iconButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService nav;
-            nav = NavigationService.GetNavigationService(this);
-            nav.Navigate(new Uri("DishTypes.xaml", UriKind.RelativeOrAbsolute));
+            var nav = NavigationService.GetNavigationService(this);
+            nav.Navigate(new Uri("DishTypes.xaml", UriKind.RelativeOrAbsolute), ID);
         }
     }
 }

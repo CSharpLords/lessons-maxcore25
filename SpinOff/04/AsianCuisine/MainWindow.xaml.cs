@@ -1,4 +1,9 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using AsianCuisine.Model;
+using BLToolkit.Data;
 
 namespace AsianCuisine
 {
@@ -10,8 +15,27 @@ namespace AsianCuisine
         public MainWindow()
         {
             InitializeComponent();
-            
+            List<Country> countries = GetCountries();
+            foreach (Country country in countries)
+            {
+                IconButton button = new IconButton();
+                button.Icon = country.Flag;
+                button.Label = country.Name;
+                button.ID = country.ID;
+                Countries.Items.Add(button);
+            }
         }
+
+        private List<Country> GetCountries()
+        {
+            using (DbManager db = new DbManager())
+            {
+                db.SetSpCommand("GetCountries");
+                List<Country> countries = db.ExecuteList<Country>();
+                return countries;
+            }
+        }
+        
         bool chinaIsClicked;
         bool japanIsClicked;
         bool southKoreaIsClicked;

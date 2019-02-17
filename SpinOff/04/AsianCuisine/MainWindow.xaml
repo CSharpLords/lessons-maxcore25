@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AsianCuisine"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" WindowHeight="450" WindowWidth="800" Height="450" Width="800">
     <Grid x:Name="Grid">
         <Grid.Resources>
             <Style  x:Key="ItemMargin" TargetType="ListBoxItem">
@@ -13,18 +13,7 @@
             </Style>
         </Grid.Resources>
 
-        <ListBox Height="327" Margin="245,81,0,0" Width="294" RenderTransformOrigin="0.5,0.5" BorderThickness="0" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" ItemContainerStyle="{StaticResource ItemMargin}">
-            <ListBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="0.5"/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="-0.991"/>
-                </TransformGroup>
-            </ListBox.RenderTransform>
-            <local:IconButton x:Name="China" Icon="../../AppData/china.png" Label="Китайская" Click="China_Click" />
-            <local:IconButton x:Name="Japan" Icon="../../AppData/japan.png " Label="Японская" Click="Japan_Click"/>
-            <local:IconButton x:Name="SouthKorea" Icon="../../AppData/southkorea.png " Label="Корейская" Click="SouthKorea_Click"/>
+        <ListBox x:Name="Countries" Height="327" Margin="245,81,0,0" Width="294" RenderTransformOrigin="0.5,0.5" BorderThickness="0" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" ItemContainerStyle="{StaticResource ItemMargin}">
         </ListBox>
         <Label Content="Азиатские кухни:" HorizontalAlignment="Left" Margin="301,28,0,0" VerticalAlignment="Top" Width="196" Height="47" FontSize="20"/>
     </Grid>

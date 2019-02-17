@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using AsianCuisine.Model;
+using BLToolkit.Data;
 
 namespace AsianCuisine
 {
@@ -23,6 +14,24 @@ namespace AsianCuisine
         public DishTypes()
         {
             InitializeComponent();
+            List<DishType> dishTypes = GetDishTypes();
+            foreach (var dishType in dishTypes)
+            {
+                Button button = new Button();
+                button.Padding = new Thickness(0, 15, 0, 15);
+                button.Content = dishType.Name;
+                DishTypeList.Items.Add(button);
+            }
+        }
+
+        private List<DishType> GetDishTypes()
+        {
+            using (DbManager db = new DbManager())
+            {
+                db.SetSpCommand("GetDishTypes");
+                List<DishType> dishTypes = db.ExecuteList<DishType>();
+                return dishTypes;
+            }
         }
     }
 }

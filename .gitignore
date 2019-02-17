@@ -76,3 +76,6 @@ sysinfo.txt
 
 # Builds
 *.apk
+
+# packages
+packages/
